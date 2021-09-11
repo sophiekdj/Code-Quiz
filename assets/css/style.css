@@ -19,6 +19,12 @@ nav {
   color: var(--primary);
 }
 
+section {
+  margin-top: 50px;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
 /* start page display - find a better way to do margins */
 .home {
   display: block;
@@ -39,4 +45,14 @@ nav {
   border: none;
   border-radius: 6px;
   transition: all 200ms ease-in-out;
+}
+
+/* Question layout */
+h2 {
+  font-size: 23px;
+}
+
+.answers {
+  color: var(--light);
+  background-color: var(--secondary);
 }
