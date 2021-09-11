@@ -35,7 +35,7 @@ section {
 }
 
 /* start quiz button display */
-#start-quiz-button {
+.start-quiz {
   display: block;
   margin: 20px auto;
   background-color: var(--primary);
@@ -45,6 +45,11 @@ section {
   border: none;
   border-radius: 6px;
   transition: all 200ms ease-in-out;
+}
+
+button:hover {
+  opacity: 0.9;
+  cursor: pointer;
 }
 
 /* Question layout */
@@ -60,12 +65,16 @@ h2 {
 /* Final score page display */
 
 #submit {
-  background-color: var(--primary);
+  background-color: var(--secondary);
   color: var(--light);
   font-size: 15px;
   padding: 4px 8px;
   border: none;
   border-radius: 6px;
   transition: all 200ms ease-in-out;
+}
+
+#submit:hover {
+  opacity: 0.8;
   cursor: pointer;
 }
