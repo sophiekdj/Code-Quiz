@@ -10,12 +10,20 @@
   <body>
     <header>
       <nav>
-        <a class="banner" id="view-highscores">View Highscores</a>
+        <!-- Takes user to Highscores page -->
+        <a href="#highscores" class="banner" id="view-highscores"
+          >View Highscores</a
+        >
+        <!-- Timer starts counting down from 75s when user clicks "Start Quiz" button -->
+        <!-- Takes away? x seconds when user gets a question wrong -->
         <a class="banner" id="time">Time: 0</a>
       </nav>
     </header>
 
+    <!-- Contains: Start page; questions section; quiz completion section; highscores page -->
+    <!-- Only one section visible at a time -->
     <main>
+      <!-- Start page of quiz: hidden when "Start Quiz" button is clicked -->
       <section class="home" id="start-page">
         <h1>Coding Quiz Challenge</h1>
         <p>
@@ -26,6 +34,7 @@
         <button class="start-quiz" id="start-quiz-button">Start Quiz</button>
       </section>
 
+      <!-- Question section of quiz: shown when "Start Quiz" button is clicked -->
       <section class="quiz" id="questions">
         <h2 id="question">Question Placeholder</h2>
         <ol class="answers">
@@ -36,9 +45,11 @@
         </ol>
       </section>
 
+      <!-- Completed quiz section: shown when quiz is completed -->
       <section class="finish" id="finish">
         <h3>All done!</h3>
         <p>Final score is</p>
+        <!-- Initials entered are recorded -->
         <form>
           <label for="initials">Enter initials:</label>
           <input type="text" id="initials" name="initials" />
@@ -51,18 +62,21 @@
         </form>
       </section>
 
+      <!-- Highscore section: hidden until player inputs initials or "View Highscores" button is clicked -->
       <section class="highscores" id="highscores">
         <h3>Highscores</h3>
         <ol class="highscores-list">
           <li class="score" id="score"></li>
         </ol>
         <form id="highscore-buttons">
+          <!-- Button takes user back to "Start Quiz" section -->
           <input
             type="submit"
             value="Go Back"
             class="section-button"
             id="go-back"
           />
+          <!-- Button clears highscores saved -->
           <input
             type="submit"
             value="Clear Highscores"
