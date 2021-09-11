@@ -1,0 +1,42 @@
+:root {
+  --primary: rgb(148, 0, 255, 1);
+  --secondary: rgb(104, 0, 178, 1);
+  --dark: rgba(0, 0, 0, 1);
+  --light: rgba(252, 252, 252, 1);
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--light);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+#view-highscores {
+  color: var(--primary);
+}
+
+/* start page display - find a better way to do margins */
+.home {
+  display: block;
+  margin-top: 50px;
+  margin-left: 25%;
+  margin-right: 25%;
+  text-align: center;
+}
+
+/* start quiz button display */
+#start-quiz-button {
+  display: block;
+  margin: 20px auto;
+  background-color: var(--primary);
+  color: var(--light);
+  font-size: 15px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  transition: all 200ms ease-in-out;
+}
