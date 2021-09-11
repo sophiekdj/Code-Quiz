@@ -23,7 +23,7 @@
           limit. Keep in mind that incorrect answers will penalize your score
           time by ten seconds
         </p>
-        <button id="start-quiz-button">Start Quiz</button>
+        <button class="start-quiz" id="start-quiz-button">Start Quiz</button>
       </section>
 
       <section class="quiz" id="questions">
@@ -42,7 +42,18 @@
         <form>
           <label for="initials">Enter initials:</label>
           <input type="text" id="initials" name="initials" />
-          <input type="submit" value="submit" />
+          <input type="submit" value="Submit" id="submit" />
+        </form>
+      </section>
+
+      <section class="highscores" id="highscores">
+        <h3>Highscores</h3>
+        <ol class="highscores">
+          <li class="score" id="score"></li>
+        </ol>
+        <form id="highscore-buttons">
+          <input type="submit" value="Go Back" id="go-back" />
+          <input type="submit" value="Clear Highscores" id="clear-highscores" />
         </form>
       </section>
     </main>
