@@ -58,9 +58,21 @@ h2 {
   font-size: 23px;
 }
 
+/* Answer button layout */
 .answers {
+  list-style: none;
+  padding: 0px 0px 0px;
+}
+
+.option {
   color: var(--light);
   background-color: var(--secondary);
+  font-size: 15px;
+  padding: 2px 6px;
+  margin: 1px;
+  border: none;
+  border-radius: 3px;
+  transition: all 200ms ease-in-out;
 }
 
 /* Final score page display */
@@ -69,9 +81,9 @@ h2 {
   background-color: var(--secondary);
   color: var(--light);
   font-size: 15px;
-  padding: 4px 8px;
+  padding: 4px 6px;
   border: none;
-  border-radius: 6px;
+  border-radius: 3px;
   transition: all 200ms ease-in-out;
 }
 
