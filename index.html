@@ -16,7 +16,7 @@
         >
         <!-- Timer starts counting down from 75s when user clicks "Start Quiz" button -->
         <!-- Takes away? x seconds when user gets a question wrong -->
-        <a class="banner" id="time">Time: 0</a>
+        <a class="banner" id="time">Time:</a>
       </nav>
     </header>
 
@@ -51,6 +51,10 @@
             <button type="button" class="option" id="option4">Option 4</button>
           </li>
         </ul>
+        <div id="answerResult">
+          <hr />
+          <!-- JavaScript enters whether answer chosen was Right or Wrong -->
+        </div>
       </section>
 
       <!-- Completed quiz section: shown when quiz is completed -->
@@ -65,7 +69,7 @@
             type="submit"
             value="Submit"
             class="section-button"
-            id="submit"
+            id="submit-score"
           />
         </form>
       </section>

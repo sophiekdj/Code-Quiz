@@ -1,5 +1,19 @@
+// Start page
+var startPage = document.querySelector("#start-page");
 // Quiz page
 var quizPage = document.querySelector("#quiz-page");
+// Complete quiz page
+var finishPage = document.querySelector("#finish");
+// Highscore page
+var highscorePage = document.querySelector("#highscores");
+
+// Start button
+var startButton = document.querySelector("#start-quiz-button");
+var highscoreButton = document.querySelector("#view-highscores");
+
+// Time left
+var quizTimer = document.querySelector("#time");
+var timeLeft = 76;
 
 // Question content
 var questionEl = document.querySelector("#question");
@@ -9,6 +23,8 @@ var ans1 = document.querySelector("#option1");
 var ans2 = document.querySelector("#option2");
 var ans3 = document.querySelector("#option3");
 var ans4 = document.querySelector("#option4");
+
+var answerResultEl = document.querySelector("#answerResult");
 
 var quizQuestions = [
   {
@@ -57,10 +73,70 @@ var quizQuestions = [
 ];
 
 // Function to set question
-function setQuestion() {
-  questionEl.textContent = quizQuestions.question;
+function setQuestion(id) {
+  if (id < quizQuestions.length) {
+    questionEl.textContent = quizQuestions[id].question;
+    ans1.textContent = quizQuestions[id].answers[0];
+    ans2.textContent = quizQuestions[id].answers[1];
+    ans3.textContent = quizQuestions[id].answers[2];
+    ans4.textContent = quizQuestions[id].answers[3];
+  }
+}
+function generateQuizQuestion() {
+  if (currentQuestionIndex === finalQuestionIndex) {
+    return showScore();
+  }
+  var currentQuestion = quizQuestions[currentQuestionIndex];
+  questionEl.innerHTML = "<p>" + currentQuestion.question + "</p>";
+
   ans1.textContent = quizQuestions.answers[0];
   ans2.textContent = quizQuestions.answers[1];
   ans3.textContent = quizQuestions.answers[2];
   ans4.textContent = quizQuestions.answers[3];
 }
+
+// Function to check answer
+function checkAnswer(event) {
+  event.preventDefault();
+
+  answerResultEl.style.display = "block";
+  let p = document.createElement("p");
+  answerResultEl.appendChild(p);
+}
+
+// On page load, start page shown
+function init() {
+  quizPage.style.display = "none";
+  finishPage.style.display = "none";
+  highscorePage.style.display = "none";
+}
+init();
+
+function startQuiz() {
+  startPage.style.display = "none";
+  finishPage.style.display = "none";
+  highscorePage.style.display = "none";
+  generateQuizQuestion;
+
+  // Timer start
+  timeInterval = setInterval(function () {
+    timeLeft--;
+    quizTimer.textContent = "Time: " + timeLeft;
+
+    if (timeLeft === 0);
+    showScore();
+  }, 1000);
+  quizPage.style.display = "block";
+}
+
+// End page screen after quiz is over
+function showScore() {
+  clearInterval(timeInterval);
+}
+
+function showHighscores() {}
+
+highscoreButton.addEventListener("click", showHighscores());
+
+// Starts the quiz!
+startButton.addEventListener("click", startQuiz);
