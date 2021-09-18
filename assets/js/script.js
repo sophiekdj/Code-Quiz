@@ -10,10 +10,11 @@ var highscorePage = document.querySelector("#highscores");
 // Start button
 var startButton = document.querySelector("#start-quiz-button");
 var highscoreButton = document.querySelector("#view-highscores");
+var goBackBtn = document.querySelector("#go-back");
 
 // Time left
 var quizTimer = document.querySelector("#time");
-var timeLeft = 76;
+var timeLeft = 5;
 
 // Question content
 var questionEl = document.querySelector("#question");
@@ -23,6 +24,8 @@ var ans1 = document.querySelector("#option1");
 var ans2 = document.querySelector("#option2");
 var ans3 = document.querySelector("#option3");
 var ans4 = document.querySelector("#option4");
+
+var ansBtn = document.querySelector("#option");
 
 var answerResultEl = document.querySelector("#answerResult");
 
@@ -77,25 +80,28 @@ var quizQuestions = [
   },
 ];
 
+console.log(quizQuestions[0].correctAnswer);
+console.log(quizQuestions[0].question);
+
 // Function to set question
-function setQuestion(id) {
-  if (id < quizQuestions.length) {
-    questionEl.textContent = quizQuestions[id].question;
-    ans1.textContent = quizQuestions[id].answers[0];
-    ans2.textContent = quizQuestions[id].answers[1];
-    ans3.textContent = quizQuestions[id].answers[2];
-    ans4.textContent = quizQuestions[id].answers[3];
+function setQuestion() {
+  //for (id < quizQuestions.length; id) {
+  for (let i = 0; i < quizQuestions.length; i++) {
+    questionEl.textContent = quizQuestions[i].question;
+    ans1.textContent = quizQuestions[i].answers[0];
+    ans2.textContent = quizQuestions[i].answers[1];
+    ans3.textContent = quizQuestions[i].answers[2];
+    ans4.textContent = quizQuestions[i].answers[3];
   }
 }
-function generateQuizQuestion() {
-  var currentQuestion = quizQuestions[currentQuestionIndex];
-  questionEl.innerHTML = "<p>" + currentQuestion.question + "</p>";
 
-  ans1.textContent = quizQuestions.answers[0];
-  ans2.textContent = quizQuestions.answers[1];
-  ans3.textContent = quizQuestions.answers[2];
-  ans4.textContent = quizQuestions.answers[3];
-}
+// Event listener's for each answer button??
+// Check answers loop
+// Check answers loop
+//function selectAns() {
+//ansBtn.addEventListener("click", checkAnswer);
+//}
+//selectAns();
 
 // Function to check answer
 function checkAnswer(event) {
@@ -104,6 +110,7 @@ function checkAnswer(event) {
   answerResultEl.style.display = "block";
   if ((correctAnswer = false)) {
     answerResultEl.textcontent = "Wrong!";
+  } else {
   }
 }
 
@@ -112,6 +119,7 @@ function init() {
   quizPage.style.display = "none";
   finishPage.style.display = "none";
   highscorePage.style.display = "none";
+  startPage.style.display = "block";
 }
 init();
 
@@ -119,12 +127,12 @@ function setTimer() {
   timerInterval = setInterval(function () {
     timeLeft--;
     quizTimer.textContent = "Time: " + timeLeft;
-
-    if (timeLeft === 0) {
-      clearInterval(timerInterval);
-    }
   }, 1000);
+  if (timeLeft === 0) {
+    clearInterval(timerInterval);
+  }
 }
+// Get timer to stop after 0???
 
 function startQuiz() {
   startPage.style.display = "none";
@@ -133,7 +141,7 @@ function startQuiz() {
 
   // Timer start
   setTimer();
-  setQuestion(id);
+  setQuestion();
   quizPage.style.display = "block";
 }
 
@@ -142,9 +150,15 @@ function showScore() {
   clearInterval(timeInterval);
 }
 
-function showHighscores() {}
+function showHighscores() {
+  startPage.style.display = "none";
+  quizPage.style.display = "none";
+  finishPage.style.display = "none";
+  highscorePage.style.display = "block";
+}
 
-highscoreButton.addEventListener("click", showHighscores());
+highscoreButton.addEventListener("click", showHighscores);
+goBackBtn.addEventListener("click", init);
 
 // Starts the quiz!
 startButton.addEventListener("click", startQuiz);
