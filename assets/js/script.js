@@ -26,6 +26,11 @@ var ans4 = document.querySelector("#option4");
 
 var answerResultEl = document.querySelector("#answerResult");
 
+var answers;
+var correctAnswer;
+
+var currentQuestionIndex = 0;
+
 var quizQuestions = [
   {
     question: "Commonly used data types DO NOT include:",
@@ -83,9 +88,6 @@ function setQuestion(id) {
   }
 }
 function generateQuizQuestion() {
-  if (currentQuestionIndex === finalQuestionIndex) {
-    return showScore();
-  }
   var currentQuestion = quizQuestions[currentQuestionIndex];
   questionEl.innerHTML = "<p>" + currentQuestion.question + "</p>";
 
@@ -100,8 +102,9 @@ function checkAnswer(event) {
   event.preventDefault();
 
   answerResultEl.style.display = "block";
-  let p = document.createElement("p");
-  answerResultEl.appendChild(p);
+  if ((correctAnswer = false)) {
+    answerResultEl.textcontent = "Wrong!";
+  }
 }
 
 // On page load, start page shown
@@ -112,20 +115,25 @@ function init() {
 }
 init();
 
+function setTimer() {
+  timerInterval = setInterval(function () {
+    timeLeft--;
+    quizTimer.textContent = "Time: " + timeLeft;
+
+    if (timeLeft === 0) {
+      clearInterval(timerInterval);
+    }
+  }, 1000);
+}
+
 function startQuiz() {
   startPage.style.display = "none";
   finishPage.style.display = "none";
   highscorePage.style.display = "none";
-  generateQuizQuestion;
 
   // Timer start
-  timeInterval = setInterval(function () {
-    timeLeft--;
-    quizTimer.textContent = "Time: " + timeLeft;
-
-    if (timeLeft === 0);
-    showScore();
-  }, 1000);
+  setTimer();
+  setQuestion(id);
   quizPage.style.display = "block";
 }
 
