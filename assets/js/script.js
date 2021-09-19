@@ -103,15 +103,23 @@ function setQuestion() {
 //ansBtn.addEventListener("click", checkAnswer);
 //}
 //selectAns();
+var score = 0;
 
 // Function to check answer
 function checkAnswer(event) {
   event.preventDefault();
 
   answerResultEl.style.display = "block";
-  if ((correctAnswer = false)) {
-    answerResultEl.textcontent = "Wrong!";
+  //if ((correctAnswer = false)) {
+  //answerResultEl.textcontent = "Wrong!";
+  //} else {
+  //}
+
+  if (quizQuestions[i].answers[correctAnswer]) {
+    score++;
+    answerResultEl.textContent("Correct!");
   } else {
+    answerResultEl.textContent("Wrong!");
   }
 }
 
@@ -157,8 +165,11 @@ function gameOver() {
 
 submitScoreButton.addEventListener("click", submitScore);
 
+var initials = document.querySelector("#submit-form");
+
 function submitScore() {
-  document.getElementById("submit-form").submit();
+  localStorage.setItem(storeScore, score);
+  localStorage.getItem(storeScore);
 }
 
 function showHighscores() {
