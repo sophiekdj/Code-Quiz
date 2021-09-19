@@ -10,6 +10,7 @@ var highscorePage = document.querySelector("#highscores");
 // Start button
 var startButton = document.querySelector("#start-quiz-button");
 var highscoreButton = document.querySelector("#view-highscores");
+var submitScoreButton = document.querySelector("#submit-score");
 var goBackBtn = document.querySelector("#go-back");
 
 // Time left
@@ -127,12 +128,12 @@ function setTimer() {
   timerInterval = setInterval(function () {
     timeLeft--;
     quizTimer.textContent = "Time: " + timeLeft;
+    if (timeLeft === 0) {
+      // or questionsLeft === 0...
+      gameOver();
+    }
   }, 1000);
-  if (timeLeft === 0) {
-    clearInterval(timerInterval);
-  }
 }
-// Get timer to stop after 0???
 
 function startQuiz() {
   startPage.style.display = "none";
@@ -140,14 +141,24 @@ function startQuiz() {
   highscorePage.style.display = "none";
 
   // Timer start
-  setTimer();
   setQuestion();
   quizPage.style.display = "block";
+  setTimer();
 }
 
 // End page screen after quiz is over
-function showScore() {
-  clearInterval(timeInterval);
+function gameOver() {
+  clearInterval(timerInterval);
+  startPage.style.display = "none";
+  quizPage.style.display = "none";
+  finishPage.style.display = "block";
+  highscorePage.style.display = "none";
+}
+
+submitScoreButton.addEventListener("click", submitScore);
+
+function submitScore() {
+  document.getElementById("submit-form").submit();
 }
 
 function showHighscores() {
