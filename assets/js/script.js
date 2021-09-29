@@ -87,13 +87,14 @@ console.log(quizQuestions[0].question);
 // Function to set question
 function setQuestion() {
   //for (id < quizQuestions.length; id) {
-  for (let i = 0; i < quizQuestions.length; i++) {
-    questionEl.textContent = quizQuestions[i].question;
-    ans1.textContent = quizQuestions[i].answers[0];
-    ans2.textContent = quizQuestions[i].answers[1];
-    ans3.textContent = quizQuestions[i].answers[2];
-    ans4.textContent = quizQuestions[i].answers[3];
-  }
+  //for (let i = 0; i < quizQuestions.length; i++) {
+  //questionEl.textContent = quizQuestions[i].question;
+  // ans1.textContent = quizQuestions[i].answers[0];
+  // ans2.textContent = quizQuestions[i].answers[1];
+  // ans3.textContent = quizQuestions[i].answers[2];
+  // ans4.textContent = quizQuestions[i].answers[3];
+  // }
+  //console.log(quizQuestions[0].answers[correctAnswer]);
 }
 
 // Event listener's for each answer button??
@@ -105,6 +106,13 @@ function setQuestion() {
 //selectAns();
 var score = 0;
 
+ans1.addEventListener("click", checkAnswer);
+
+function check() {
+  console.log("sup");
+}
+//console.log(quizQuestions.answers[correctAnswer]);
+
 // Function to check answer
 function checkAnswer(event) {
   event.preventDefault();
@@ -114,6 +122,8 @@ function checkAnswer(event) {
   //answerResultEl.textcontent = "Wrong!";
   //} else {
   //}
+
+  //console.log(quizQuestions[i].answers[correctAnswer]);
 
   if (quizQuestions[i].answers[correctAnswer]) {
     score++;
@@ -170,6 +180,7 @@ var initials = document.querySelector("#submit-form");
 function submitScore() {
   localStorage.setItem(storeScore, score);
   localStorage.getItem(storeScore);
+  showHighscores();
 }
 
 function showHighscores() {
