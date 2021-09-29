@@ -15,7 +15,7 @@ var goBackBtn = document.querySelector("#go-back");
 
 // Time left
 var quizTimer = document.querySelector("#time");
-var timeLeft = 5;
+var timeLeft = 75;
 
 // Question content
 var questionEl = document.querySelector("#question");
@@ -35,11 +35,13 @@ var correctAnswer;
 
 var currentQuestionIndex = 0;
 
+var playerHistory = JSON.parse(localStorage.getItem("storeScore")) || [];
+
 var quizQuestions = [
   {
     question: "Commonly used data types DO NOT include:",
     answers: ["1. Strings", "2. Booleans", "3. Alerts", "4. Numbers"],
-    correctAnswer: "2",
+    correctAnswer: 2,
   },
 
   {
@@ -50,7 +52,7 @@ var quizQuestions = [
       "3. Parentheses",
       "4. Square brackets",
     ],
-    correctAnswer: "2",
+    correctAnswer: 2,
   },
   {
     question: "Arrays in JavaScript can be used to store ___.",
@@ -60,13 +62,13 @@ var quizQuestions = [
       "3. Booleans",
       "4. All of the above",
     ],
-    correctAnswer: "3",
+    correctAnswer: 3,
   },
   {
     question:
       "String values must be enclosed with ___ when being assigned to variables",
     answers: ["1. Commas", "2. Curly brackets", "3. Quotes", "4. Parentheses"],
-    correctAnswer: "2",
+    correctAnswer: 2,
   },
   {
     question:
@@ -77,36 +79,35 @@ var quizQuestions = [
       "3. for loops",
       "4. console.log",
     ],
-    correctAnswer: "3",
+    correctAnswer: 3,
   },
 ];
-
-console.log(quizQuestions[0].correctAnswer);
-console.log(quizQuestions[0].question);
 
 // Function to set question
 function setQuestion() {
   //for (id < quizQuestions.length; id) {
-  //for (let i = 0; i < quizQuestions.length; i++) {
-  //questionEl.textContent = quizQuestions[i].question;
-  // ans1.textContent = quizQuestions[i].answers[0];
-  // ans2.textContent = quizQuestions[i].answers[1];
-  // ans3.textContent = quizQuestions[i].answers[2];
-  // ans4.textContent = quizQuestions[i].answers[3];
-  // }
-  //console.log(quizQuestions[0].answers[correctAnswer]);
+  questionEl.textContent = quizQuestions[currentQuestionIndex].question;
+
+  ans1.textContent = quizQuestions[currentQuestionIndex].answers[0];
+  ans2.textContent = quizQuestions[currentQuestionIndex].answers[1];
+  ans3.textContent = quizQuestions[currentQuestionIndex].answers[2];
+  ans4.textContent = quizQuestions[currentQuestionIndex].answers[3];
 }
+//console.log(quizQuestions[0].answers[correctAnswer]);
 
 // Event listener's for each answer button??
 // Check answers loop
 // Check answers loop
 //function selectAns() {
-//ansBtn.addEventListener("click", checkAnswer);
+// ansBtn.addEventListener("click", checkAnswer);
 //}
 //selectAns();
 var score = 0;
 
 ans1.addEventListener("click", checkAnswer);
+ans2.addEventListener("click", checkAnswer);
+ans3.addEventListener("click", checkAnswer);
+ans4.addEventListener("click", checkAnswer);
 
 function check() {
   console.log("sup");
@@ -116,20 +117,33 @@ function check() {
 // Function to check answer
 function checkAnswer(event) {
   event.preventDefault();
+  console.log(event.target);
+  console.log(event.target.textContent);
 
   answerResultEl.style.display = "block";
-  //if ((correctAnswer = false)) {
-  //answerResultEl.textcontent = "Wrong!";
-  //} else {
-  //}
 
-  //console.log(quizQuestions[i].answers[correctAnswer]);
+  console.log(
+    quizQuestions[currentQuestionIndex].answers[
+      quizQuestions[currentQuestionIndex].correctAnswer
+    ]
+  );
 
-  if (quizQuestions[i].answers[correctAnswer]) {
+  if (
+    quizQuestions[currentQuestionIndex].answers[
+      quizQuestions[currentQuestionIndex].correctAnswer
+    ] == event.target.textContent
+  ) {
     score++;
-    answerResultEl.textContent("Correct!");
+    answerResultEl.textContent = "Correct!";
   } else {
-    answerResultEl.textContent("Wrong!");
+    answerResultEl.textContent = "Wrong!";
+  }
+  console.log(currentQuestionIndex);
+  currentQuestionIndex++;
+  if (currentQuestionIndex < quizQuestions.length) {
+    setQuestion();
+  } else {
+    gameOver();
   }
 }
 
@@ -175,11 +189,16 @@ function gameOver() {
 
 submitScoreButton.addEventListener("click", submitScore);
 
-var initials = document.querySelector("#submit-form");
+var initials = document.getElementById("initials");
 
 function submitScore() {
-  localStorage.setItem(storeScore, score);
-  localStorage.getItem(storeScore);
+  var newPlayer = {
+    playerInitials: initials.value,
+    score: score,
+  };
+  playerHistory.push(newPlayer);
+  localStorage.setItem("storeScore", JSON.stringify(playerHistory));
+  localStorage.getItem("storeScore");
   showHighscores();
 }
 
@@ -188,6 +207,7 @@ function showHighscores() {
   quizPage.style.display = "none";
   finishPage.style.display = "none";
   highscorePage.style.display = "block";
+  console.log(playerHistory);
 }
 
 highscoreButton.addEventListener("click", showHighscores);
